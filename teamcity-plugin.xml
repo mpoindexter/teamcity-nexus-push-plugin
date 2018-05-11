@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teamcity-plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:schemas-jetbrains-com:teamcity-plugin-v1-xml">
+  <info>
+    <name>nexus-push-plugin</name>
+    <display-name>nexus-push-plugin</display-name>
+    <version>@Version@</version>
+    <description>Pushes artifact to Nexus</description>
+    <download-url>https://github.com/mpoindexter/teamcity-nexus-push-plugin</download-url>
+    <email></email>
+    <vendor>
+      <name>Mike Poindexter</name>
+      <url>https://github.com/mpoindexter/</url>
+      <logo></logo>
+    </vendor>
+  </info>
+  <deployment use-separate-classloader="true" />
+</teamcity-plugin>

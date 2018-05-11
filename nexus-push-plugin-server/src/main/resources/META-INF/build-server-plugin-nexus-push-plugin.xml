@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-autowire="constructor">
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.feature.NexusPushFeature" />
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.feature.NexusPushFeatureController" />
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.global.GlobalSettingsTab" />
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.global.GlobalSettingsManager" />
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.NexusPushBuildListener" />
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.NexusCleanupExtension" />
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.report.NexusArtifactsReportTab" />
+</beans>
