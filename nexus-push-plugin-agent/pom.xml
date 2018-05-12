@@ -6,9 +6,8 @@
     <groupId>com.github.mpoindexter.teamcity</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <artifactId>nexus-push-plugin-server</artifactId>
+  <artifactId>nexus-push-plugin-agent</artifactId>
   <packaging>jar</packaging>
-
   <dependencies>
     <dependency>
       <groupId>com.github.mpoindexter.teamcity</groupId>
@@ -16,34 +15,26 @@
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+
     <dependency>
       <groupId>org.jetbrains.teamcity</groupId>
-      <artifactId>server-api</artifactId>
+      <artifactId>agent-api</artifactId>
       <version>${teamcity-version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.jetbrains.teamcity</groupId>
-      <artifactId>server-web-api</artifactId>
-      <version>${teamcity-version}</version>
-      <type>war</type>
-      <scope>provided</scope>
-    </dependency>
+
     <dependency>
       <groupId>org.jetbrains.teamcity</groupId>
       <artifactId>tests-support</artifactId>
       <version>${teamcity-version}</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
       <version>3.10.0</version>
     </dependency>
-    <dependency>
-      <groupId>com.squareup.moshi</groupId>
-      <artifactId>moshi</artifactId>
-      <version>1.5.0</version>
-    </dependency>
+
   </dependencies>
 </project>

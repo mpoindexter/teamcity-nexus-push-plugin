@@ -52,4 +52,12 @@
     <span class="smallNote">If checked artifacts will be deleted from Nexus when the corresponding build is removed from TeamCity</span>
   </td>
 </tr>
+<tr>
+  <th>Fail build if publishing fails:<l:star/></th>
+  <td>
+    <props:checkboxProperty name="artifactUploadMandatory" uncheckedValue="false" />
+    <span class="error" id="error_artifactUploadMandatory"></span>
+    <span class="smallNote">If checked the build will be failed if artifacts cannot be uploaded to Nexus</span>
+  </td>
+</tr>
 </l:settingsGroup>

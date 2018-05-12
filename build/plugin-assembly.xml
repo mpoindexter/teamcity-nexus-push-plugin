@@ -9,6 +9,10 @@
      <file>
          <source>target/teamcity-plugin.xml</source>
          <outputDirectory>/</outputDirectory>
+     </file>
+     <file>
+         <source>target/nexus-push-plugin-agent.zip</source>
+         <outputDirectory>agent</outputDirectory>
      </file> 
   </files>
   <moduleSets>
@@ -16,6 +20,7 @@
        <useAllReactorProjects>true</useAllReactorProjects>
        <includes>
            <include>com.github.mpoindexter.teamcity:nexus-push-plugin-server</include>
+           <include>com.github.mpoindexter.teamcity:nexus-push-plugin-common</include>
        </includes> 
        <binaries>
            <outputDirectory>server</outputDirectory>

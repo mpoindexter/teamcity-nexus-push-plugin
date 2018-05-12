@@ -7,7 +7,7 @@
        <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.feature.NexusPushFeatureController" />
        <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.global.GlobalSettingsTab" />
        <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.global.GlobalSettingsManager" />
-       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.NexusPushBuildListener" />
        <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.NexusCleanupExtension" />
+       <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.NexusBuildStartContextProcessor" />
        <bean class="com.github.mpoindexter.teamcity.nexuspushplugin.report.NexusArtifactsReportTab" />
 </beans>

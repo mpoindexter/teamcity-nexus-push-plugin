@@ -9,11 +9,8 @@ package com.github.mpoindexter.teamcity.nexuspushplugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.github.mpoindexter.teamcity.nexuspushplugin.feature.NexusPushFeature;
 import com.github.mpoindexter.teamcity.nexuspushplugin.global.CredentialsBean;
 import com.github.mpoindexter.teamcity.nexuspushplugin.global.GlobalSettingsManager;
 import com.github.mpoindexter.teamcity.nexuspushplugin.global.ServerConfigBean;
@@ -29,7 +26,6 @@ import org.jdom.filter.ElementFilter;
 import org.jetbrains.annotations.NotNull;
 
 import jetbrains.buildServer.log.Loggers;
-import jetbrains.buildServer.serverSide.SBuildFeatureDescriptor;
 import jetbrains.buildServer.serverSide.SFinishedBuild;
 import jetbrains.buildServer.serverSide.cleanup.BuildCleanupContext;
 import jetbrains.buildServer.serverSide.cleanup.CleanupExtensionAdapter;
@@ -70,24 +66,15 @@ public class NexusCleanupExtension extends CleanupExtensionAdapter implements Po
             if (cleanupContext.getCleanupLevel().isCleanArtifacts()) {
                 File metadataFile = new File(build.getArtifactsDirectory(), Constants.NEXUS_BUILD_METADATA_PATH);
                 if (!metadataFile.exists()) {
+                    LOG.info("Build " + build.getBuildId() + " has no Nexus metadata, skipping");
                     continue;
                 }
-
-                Map<String, SBuildFeatureDescriptor> featureDescriptors = new HashMap<>();
-                for (SBuildFeatureDescriptor feature : build.getBuildFeaturesOfType(NexusPushFeature.FEATURE_TYPE)) {
-                    featureDescriptors.put(feature.getId(), feature);
-                }
-
                 try {
                     Document doc = JDOMUtil.loadDocument(metadataFile);
                     Element root = doc.getRootElement();
                     @SuppressWarnings("unchecked")
                     List<Element> artifactElements = root.getContent(new ElementFilter("artifact"));
                     for (Element artifactElement : artifactElements) {
-                        String featureId = artifactElement.getAttributeValue("featureId");
-                        if (StringUtil.isEmptyOrSpaces(featureId)) {
-                            continue;
-                        }
                         String sha1 = artifactElement.getAttributeValue("sha1");
                         if (StringUtil.isEmptyOrSpaces(sha1)) {
                             continue;
@@ -101,14 +88,11 @@ public class NexusCleanupExtension extends CleanupExtensionAdapter implements Po
                             continue;
                         }
 
-                        if (featureDescriptors.containsKey(featureId)) {
-                            SBuildFeatureDescriptor feature = featureDescriptors.get(featureId);
-                            Map<String, String> parameters = feature.getParameters();
-
-                            String deleteArtifactOnCleanup = parameters.get(Constants.DELETE_ARTIFACT_ON_CLEANUP);
-                            if ("true".equals(deleteArtifactOnCleanup)) {
-                                removeComponent(build.getBuildId(), serverId, repository, sha1, cleanupContext.getErrorReporter());
-                            }
+                        String deleteArtifactOnCleanup = artifactElement.getAttributeValue("deleteArtifactOnCleanup");
+                        if ("true".equals(deleteArtifactOnCleanup)) {
+                            removeComponent(build.getBuildId(), serverId, repository, sha1, cleanupContext.getErrorReporter());
+                        } else {
+                            LOG.info("Artifact " + sha1 + " is not marked for deletion, skipping");
                         }
                     }
                 } catch (IOException | JDOMException e) {
@@ -158,9 +142,11 @@ public class NexusCleanupExtension extends CleanupExtensionAdapter implements Po
                         LOG.warn("Artifact did not have exactly one component associated, will not remove for build " + buildId);
                     }
                 } else {
+                    LOG.warn("Cannot find artifact on cleanup nexus artifact: " + response.body().string());
                     errorReporter.buildCleanupError(buildId, "Cannot find artifact on cleanup nexus artifact: " + response.body().string());
                 }
             } catch (IOException e) {
+                LOG.warn("IO Exception on cleanup nexus artifact: " + e.getMessage());
                 errorReporter.buildCleanupError(buildId, "IO Exception on cleanup nexus artifact: " + e.getMessage());
             }
         }

@@ -43,6 +43,8 @@
       </pluginManagement>
   </build>
   <modules>
+    <module>nexus-push-plugin-common</module>
+    <module>nexus-push-plugin-agent</module>
     <module>nexus-push-plugin-server</module>
     <module>build</module>
   </modules>

@@ -25,7 +25,7 @@ import jetbrains.buildServer.serverSide.InvalidProperty;
 import jetbrains.buildServer.serverSide.PropertiesProcessor;
 
 public class NexusPushFeature extends BuildFeature {
-    public static final String FEATURE_TYPE = "com.github.mpoindexter.teamcity.nexuspushplugin";
+    
 
     private final NexusPushFeatureController controller;
     private final GlobalSettingsManager globalSettings;
@@ -39,7 +39,7 @@ public class NexusPushFeature extends BuildFeature {
     @Override
     @NotNull
     public String getType() {
-        return FEATURE_TYPE;
+        return Constants.NEXUS_PUSH_FEATURE_TYPE;
     }
 
     @NotNull
@@ -100,6 +100,11 @@ public class NexusPushFeature extends BuildFeature {
                 if (StringUtil.isEmptyOrSpaces(deleteOnCleanup)) {
                     errors.add(new InvalidProperty(Constants.DELETE_ARTIFACT_ON_CLEANUP, "Specify whether to delete artifact on cleanup"));
                 }
+
+                String artifactUploadMandatory = params.get(Constants.ARTIFACT_UPLOAD_MANDATORY);
+                if (StringUtil.isEmptyOrSpaces(artifactUploadMandatory)) {
+                    errors.add(new InvalidProperty(Constants.ARTIFACT_UPLOAD_MANDATORY, "Specify whether to fail the build if artifact upload fails"));
+                }
                 
                 return errors;
             }
@@ -108,6 +113,6 @@ public class NexusPushFeature extends BuildFeature {
 
     @Override
     public boolean isRequiresAgent() {
-        return false;
+        return true;
     }
 }
