@@ -108,7 +108,7 @@ public class NexusCleanupExtension extends CleanupExtensionAdapter implements Po
             try {
                 CredentialsBean credentials = serverConfig.getCredentials();
                 HttpUrl url = HttpUrl.parse(serverConfig.getUrl()).newBuilder()
-                    .addPathSegments("service/rest/beta/search")
+                    .addPathSegments("service/rest/v1/search")
                     .addQueryParameter("repository", repository)
                     .addQueryParameter("sha1", sha1)
                     .build();
@@ -125,7 +125,7 @@ public class NexusCleanupExtension extends CleanupExtensionAdapter implements Po
                     if (searchResponse.getItems() != null && searchResponse.getItems().size() == 1) {
                         String componentId = searchResponse.getItems().get(0).getId();
                         HttpUrl deleteUrl = HttpUrl.parse(serverConfig.getUrl()).newBuilder()
-                            .addPathSegments("service/rest/beta/components")
+                            .addPathSegments("service/rest/v1/components")
                             .addPathSegment(componentId)
                             .build();
                         Request deleteRequest = new Request.Builder()

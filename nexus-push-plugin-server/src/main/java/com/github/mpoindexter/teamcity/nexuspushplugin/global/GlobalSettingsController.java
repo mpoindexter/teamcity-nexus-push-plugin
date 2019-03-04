@@ -111,7 +111,7 @@ public class GlobalSettingsController extends BaseFormXmlController {
 
         try {
             HttpUrl requestUrl = HttpUrl.parse(url).newBuilder()
-                                    .addPathSegments("service/rest/beta/read-only")
+                                    .addPathSegments("service/rest/v1/read-only")
                                     .build();
             Request httpRequest = new Request.Builder()
                 .url(requestUrl)

@@ -158,7 +158,7 @@ public class NexusAgentListener extends AgentLifeCycleAdapter {
 
             try {
                 HttpUrl url = HttpUrl.parse(serverSettings.getUrl()).newBuilder()
-                    .addPathSegments("service/rest/beta/components")
+                    .addPathSegments("service/rest/v1/components")
                     .addQueryParameter("repository", repositoryId)
                     .build();
 

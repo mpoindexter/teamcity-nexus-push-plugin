@@ -87,7 +87,7 @@ public class NexusArtifactsReportTab extends ViewLogTab {
                     try {
                         CredentialsBean credentials = serverConfig.getCredentials();
                         HttpUrl url = HttpUrl.parse(serverConfig.getUrl()).newBuilder()
-                            .addPathSegments("service/rest/beta/search")
+                            .addPathSegments("service/rest/v1/search")
                             .addQueryParameter("repository", repository)
                             .addQueryParameter("sha1", sha1)
                             .build();
