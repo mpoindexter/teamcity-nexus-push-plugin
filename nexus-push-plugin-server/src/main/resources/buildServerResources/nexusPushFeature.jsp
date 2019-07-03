@@ -35,11 +35,14 @@
     <span class="error" id="error_uploadSettings"></span>
     <span class="smallNote">
       For example for RAW:
-      <br>
+      <br><br>
       raw.directory=TC_plugin/
+      <br>
       raw.asset1=@target/nexus-push-plugin.zip
+      <br>
       raw.asset1.filename=nexus-push-plugin.zip
       <br>
+      <br><br>
       <a href ="https://help.sonatype.com/repomanager3/rest-and-integration-api/components-api">More example in doc REST NEXUS</a>
     </span>
   </td>
