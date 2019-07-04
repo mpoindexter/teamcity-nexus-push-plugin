@@ -17,7 +17,7 @@ TeamCity plugin to push artifacts to Nexus.  Supports automatically cleaning up 
  Artifact Upload Parameters - Set your artifact param:
  ----------------EXAMPLE------------------------
 raw.directory=TC_plugin/
-raw.asset1=@build/target/nexus-push-plugin.zip
+raw.asset1=@target/nexus-push-plugin.zip
 raw.asset1.filename=nexus-push-plugin.zip
 -------------------END--------------------------
  More config read: https://help.sonatype.com/repomanager3/rest-and-integration-api/components-api
