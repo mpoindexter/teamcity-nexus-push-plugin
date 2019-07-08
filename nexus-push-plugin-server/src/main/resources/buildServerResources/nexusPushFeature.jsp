@@ -34,13 +34,16 @@
     <props:multilineProperty name="uploadSettings" linkTitle="Artifact Upload Parameters" cols="49" rows="5" className="longField" />
     <span class="error" id="error_uploadSettings"></span>
     <span class="smallNote">
-      Specify as upload_post_name=&lt;string&gt; for a fixed value or upload_post_name=@&lt;artifact_path&gt;
-
-      For example:
-      <pre>
-      npm.tag=My Special Tag
-      npm.artifact=@package.tgz
-      </pre>
+      For example for RAW:
+      <br><br>
+      raw.directory=TC_plugin/
+      <br>
+      raw.asset1=@target/nexus-push-plugin.zip
+      <br>
+      raw.asset1.filename=nexus-push-plugin.zip
+      <br>
+      <br><br>
+      <a href ="https://help.sonatype.com/repomanager3/rest-and-integration-api/components-api">More example in doc REST NEXUS</a>
     </span>
   </td>
 </tr>
