@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.github.mpoindexter.teamcity.nexuspushplugin.ArtifactUploadSettings;
 import com.github.mpoindexter.teamcity.nexuspushplugin.Constants;
@@ -51,7 +52,10 @@ import okio.Okio;
 public class NexusAgentListener extends AgentLifeCycleAdapter {
     private static final Logger LOG = Loggers.AGENT;
 
-    private static final OkHttpClient CLIENT = new OkHttpClient();
+    private static final OkHttpClient CLIENT = new OkHttpClient.Builder()
+        .readTimeout(1, TimeUnit.MINUTES)
+        .connectTimeout(1, TimeUnit.MINUTES)
+        .build();
 
     private final ArtifactsWatcher artifactWatcher;
 
